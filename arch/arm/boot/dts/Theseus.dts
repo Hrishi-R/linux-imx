@@ -1,4 +1,4 @@
-/theseus-dts-v11/;
+/dts-v1/;
 
 #include "imx6ull.dtsi"
 #include "imx6ull-var-som.dtsi"
