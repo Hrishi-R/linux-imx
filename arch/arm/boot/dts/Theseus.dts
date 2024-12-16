@@ -115,8 +115,10 @@
     dr_mode = "host";  // Set the USB OTG controller to Host mode
     status = "okay";
 };
-
-//todo: do we need to separately add usborg2 as a peripheral? status ok?
+&usbotg2 {
+    dr_mode = "otg";  // Set the USB OTG 2 to peripheral mode
+    status = "okay";
+};
 
 &usdhc1 {
   cd-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
