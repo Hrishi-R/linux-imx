@@ -8,202 +8,215 @@
 #include "imx6ull-var-som-concerto-board.dtsi"
 
 / {
-  model = "Variscite VAR-SOM-6UL with i.MX6ULL, eMMC, WiFi & WM8904 support on Concerto-Board";
-  compatible = "variscite,imx6ul-var-som", "fsl,imx6ull";
+        model = "Variscite VAR-SOM-6UL with i.MX6ULL, eMMC, WiFi & WM8904 support on Concerto-Board";
+        compatible = "variscite,imx6ul-var-som", "fsl,imx6ull";
 };
 
 
 /* I2C3 */
 &i2c3 {
-    clock-frequency = <100000>;
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_i2c3>;
-    status = "okay";
+        clock-frequency = <100000>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_i2c3>;
+        status = "okay";
 };
 
 /* I2C4 */
 &i2c4 {
-    clock-frequency = <100000>;
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_i2c4>;
-    status = "okay";
+        clock-frequency = <100000>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_i2c4>;
+        status = "okay";
 };
 
 /* PWM1 */
 &pwm1 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_pwm1>;
-    status = "okay";
-    export = <0>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_pwm1>;
+        status = "okay";
+        export = <0>;
 };
 
 /* PWM2 */
 &pwm2 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_pwm2>;
-    status = "okay";
-    export = <0>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_pwm2>;
+        status = "okay";
+        export = <0>;
 };
 /* PWM3 */
 &pwm3 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_pwm3>;
-    status = "okay";
-    export = <0>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_pwm3>;
+        status = "okay";
+        export = <0>;
 };
 
 /* PWM4 */
 &pwm4 {
-  pinctrl-names = "default";
-  pinctrl-0 = <&pinctrl_pwm4>;
-  status = "okay";
-  export = <0>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_pwm4>;
+        status = "okay";
+        export = <0>;
 };
 
 /* ttymxc4 UART */
 &uart5 {
-  pinctrl-names = "default";
-  pinctrl-0 = <&pinctrl_uart5>;
-  status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_uart5>;
+        status = "okay";
 };
 
 /* UART7 */
 &uart7 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_uart7>;
-    status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_uart7>;
+        status = "okay";
 };
 
 /* UART8 */
 &uart8 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_uart8>;
-    status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_uart8>;
+        status = "okay";
 };
 
 &gpio1 {
-    status = "okay";
+        status = "okay";
 };
 
 &gpio2 {
-  pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_gpio2_io3>;
-    status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_gpio2_io3>;
+        status = "okay";
 };
 
 &gpio3 {
-    status = "okay";
+        status = "okay";
 };
 
 &gpio4 {
-    status = "okay";
+        status = "okay";
 };
 
 &gpio5 {
-    status = "okay";
+        status = "okay";
 };
 
 &lcdif {
-  status = "disabled";
+        status = "disabled";
 };
 
+
 &fec2 {
-  status = "disabled";
+        status = "disabled";
 };
 
 &usbotg1 {
-    dr_mode = "host";  // Set the USB OTG controller to Host mode
-    status = "okay";
+        dr_mode = "host";  // Set the USB OTG controller to Host mode
+        status = "okay";
 };
 
 //todo: do we need to separately add usborg2 as a peripheral? status ok?
 
 &usdhc1 {
-  cd-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
+        cd-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
 };
 
 &iomuxc {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_gpi_hog>;
+        pinctrl_gpi_hog: gpiohoggrp {
+                fsl,pins = <
+                        MX6UL_PAD_ENET1_TX_DATA0__GPIO2_IO03     0x17059 /* GPIO2_io3 for pump enable */
+                >;
+        };
+};
 
-  /*GPIO2_io3 for pump enable*/
-  //TODO: make this active_low
-  pinctrl_gpio2_io3: gpio2io3grp {
-      fsl,pins = <
-          MX6UL_PAD_ENET1_TX_DATA0__GPIO2_IO03     0x17059
-      >;
-  };
 
 
-  /* I2C3 Pins */
-  pinctrl_i2c3: i2c3grp {
-      fsl,pins = <
-          MX6UL_PAD_ENET2_RX_DATA0__I2C3_SCL       0x4001b8b1
-          MX6UL_PAD_ENET2_RX_DATA1__I2C3_SDA       0x4001b8b1
-      >;
-  };
+&iomuxc {
 
-  /* I2C4 Pins */
-  pinctrl_i2c4: i2c4grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA03__I2C4_SCL          0x4001b8b1
-          MX6UL_PAD_LCD_DATA02__I2C4_SDA          0x4001b8b1
-      >;
-  };
+        /*GPIO2_io3 for pump enable*/
+        //TODO: make this active_low
+        pinctrl_gpio2_io3: gpio2io3grp {
+                fsl,pins = <
+                        MX6UL_PAD_ENET1_TX_DATA0__GPIO2_IO03     0x17059
+                >;
+        };
 
-  /* PWM1 Pin */
-  pinctrl_pwm1: pwm1grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA00__PWM1_OUT          0x1b0b0
-      >;
-  };
 
-  /* PWM2 Pin */
-  pinctrl_pwm2: pwm2grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA01__PWM2_OUT          0x1b0b0
-      >;
-  };
+        /* I2C3 Pins */
+        pinctrl_i2c3: i2c3grp {
+                fsl,pins = <
+                        MX6UL_PAD_ENET2_RX_DATA0__I2C3_SCL       0x4001b8b1
+                        MX6UL_PAD_ENET2_RX_DATA1__I2C3_SDA       0x4001b8b1
+                >;
+        };
 
-  /* PWM3 Pin */
-  pinctrl_pwm3: pwm3grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA02__PWM3_OUT          0x1b0b0
-      >;
-  };
+        /* I2C4 Pins */
+        pinctrl_i2c4: i2c4grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA03__I2C4_SCL          0x4001b8b1
+                        MX6UL_PAD_LCD_DATA02__I2C4_SDA          0x4001b8b1
+                >;
+        };
 
-  /* PWM4 Pin */
-  pinctrl_pwm4: pwm4grp {
-      fsl,pins = <
-          MX6UL_PAD_GPIO1_IO05__PWM4_OUT          0x1b0b0
-      >;
-  };
+        /* PWM1 Pin */
+        pinctrl_pwm1: pwm1grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA00__PWM1_OUT          0x1b0b0
+                >;
+        };
 
-  pinctrl_uart5: uart5grp {
-    fsl,pins = <
-      MX6UL_PAD_CSI_DATA00__UART5_DCE_TX  0x1b0b1
-      MX6UL_PAD_CSI_DATA01__UART5_DCE_RX  0x1b0b1
-    >;
-  };
+        /* PWM2 Pin */
+        pinctrl_pwm2: pwm2grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA01__PWM2_OUT          0x1b0b0
+                >;
+        };
 
-  /* UART7 Pins */
-  pinctrl_uart7: uart7grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA16__UART7_DCE_TX      0x1b0b1
-          MX6UL_PAD_LCD_DATA17__UART7_DCE_RX      0x1b0b1
-      >;
-  };
+        /* PWM3 Pin */
+        pinctrl_pwm3: pwm3grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA02__PWM3_OUT          0x1b0b0
+                >;
+        };
 
-  /* UART8 Pins */
-  pinctrl_uart8: uart8grp {
-      fsl,pins = <
-          MX6UL_PAD_LCD_DATA20__UART8_DCE_TX      0x1b0b1
-          MX6UL_PAD_LCD_DATA21__UART8_DCE_RX      0x1b0b1
-      >;
-  };
+        /* PWM4 Pin */
+        pinctrl_pwm4: pwm4grp {
+                fsl,pins = <
+                        MX6UL_PAD_GPIO1_IO05__PWM4_OUT          0x1b0b0
+                >;
+        };
 
-  pinctrl_usdhc1_gpio: usdhc1_gpiogrp {
-    fsl,pins = <
-      MX6UL_PAD_GPIO1_IO00__GPIO1_IO00  0x1b0b1 /* CD */
-    >;
-  };
+        pinctrl_uart5: uart5grp {
+                fsl,pins = <
+                        MX6UL_PAD_CSI_DATA00__UART5_DCE_TX  0x1b0b1
+                        MX6UL_PAD_CSI_DATA01__UART5_DCE_RX  0x1b0b1
+                >;
+        };
+
+        /* UART7 Pins */
+        pinctrl_uart7: uart7grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA16__UART7_DCE_TX      0x1b0b1
+                        MX6UL_PAD_LCD_DATA17__UART7_DCE_RX      0x1b0b1
+                >;
+        };
+
+        /* UART8 Pins */
+        pinctrl_uart8: uart8grp {
+                fsl,pins = <
+                        MX6UL_PAD_LCD_DATA20__UART8_DCE_TX      0x1b0b1
+                        MX6UL_PAD_LCD_DATA21__UART8_DCE_RX      0x1b0b1
+                >;
+        };
+
+        pinctrl_usdhc1_gpio: usdhc1_gpiogrp {
+                fsl,pins = <
+                        MX6UL_PAD_GPIO1_IO00__GPIO1_IO00  0x1b0b1 /* CD */
+                >;
+        };
 
 };
