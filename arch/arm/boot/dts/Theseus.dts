@@ -85,9 +85,7 @@
     status = "okay";
 };
 
-&gpio2 {
-  pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_gpio2_io3>;
+&gpio2 {  
     status = "okay";
 };
 
@@ -124,11 +122,12 @@
 
 &iomuxc {
 
-  /*GPIO2_io3 for pump enable*/
-  //TODO: make this active_low
-  pinctrl_gpio2_io3: gpio2io3grp {
+  pinctrl-names = "default";
+  pinctrl-0 = <&pinctrl_gpi_hog>;
+  pinctrl_gpi_hog: gpiohoggrp {
       fsl,pins = <
           MX6UL_PAD_ENET1_TX_DATA0__GPIO2_IO03     0x17059
+          MX6UL_PAD_ENET1_TX_CLK__GPIO2_IO06       0x17059
       >;
   };
 
