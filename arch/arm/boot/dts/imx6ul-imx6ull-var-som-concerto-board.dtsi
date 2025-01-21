@@ -11,8 +11,8 @@
 		compatible = "pwm-backlight";
 		pwms = <&pwm4 0 20000>;
 		brightness-levels = <0 4 8 16 32 64 128 255>;
-		default-brightness-level = <6>;
-		status = "okay";
+		default-brightness-level = <0>;
+		status = "disable";
 	};
 
 	chosen {
@@ -36,16 +36,6 @@
 		};
 	};
 
-	leds {
-		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_gpio_leds>;
-
-		gpled2 {
-			gpios = <&gpio1 25 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "heartbeat";
-		};
-	};
 };
 
 &can1 {
@@ -159,12 +149,6 @@
 	pinctrl_gpio_keys: gpio_keysgrp {
 		fsl,pins = <
 			MX6UL_PAD_NAND_CE1_B__GPIO4_IO14	0x17059 /* Back */
-		>;
-	};
-
-	pinctrl_gpio_leds: gpio_ledsgrp {
-		fsl,pins = <
-			MX6UL_PAD_UART3_RX_DATA__GPIO1_IO25	0x1b0b0	/* GPLED2 */
 		>;
 	};
 
