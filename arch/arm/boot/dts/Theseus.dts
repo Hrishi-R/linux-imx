@@ -1,6 +1,5 @@
 /dts-v1/;
 
-
 #include "imx6ull.dtsi"
 #include "imx6ull-var-som.dtsi"
 #include "imx6ul-imx6ull-var-som-emmc.dtsi"
@@ -128,10 +127,6 @@
     dr_mode = "host";  // Set the USB OTG controller to Host mode
     status = "okay";
 };
-&usbotg2 {
-    dr_mode = "peripheral";  // Set the USB OTG controller to Host mode
-    status = "okay";
-};
 
 //todo: do we need to separately add usborg2 as a peripheral? status ok?
 
@@ -151,7 +146,6 @@
           MX6UL_PAD_LCD_ENABLE__GPIO3_IO01         0x17059  // USBH_PWREN
           MX6UL_PAD_SNVS_TAMPER8__GPIO5_IO08       0x17059  // USBH_FAULT
           MX6UL_PAD_LCD_DATA11__GPIO3_IO16         0x17059  // VALVE_PWR_EN1
-          MX6UL_PAD_NAND_CLE__GPIO4_IO15           0x17059  // VALVE_PWR_EN2
           MX6UL_PAD_GPIO1_IO00__GPIO1_IO00         0x17059  // VALVE_PWR_EN3
           MX6UL_PAD_SNVS_TAMPER3__GPIO5_IO03       0x17059  // VALVE_PWR_EN4
           MX6UL_PAD_LCD_DATA15__GPIO3_IO20         0x17059  // GPIO0
@@ -174,7 +168,6 @@
           MX6UL_PAD_ENET1_RX_DATA0__GPIO2_IO00    0x17059  // Button Volume up
           MX6UL_PAD_LCD_HSYNC__GPIO3_IO02         0x17059  // Fan 1 Tach
           MX6UL_PAD_LCD_VSYNC__GPIO3_IO03         0x17059  // Fan 2 Tach
-          MX6UL_PAD_NAND_DQS__GPIO4_IO16          0x17059  //VIBR_TRIG
           
       >;
   };
