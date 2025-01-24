@@ -1,0 +1,123 @@
+/*
+ * Copyright (C) 2024 Variscite Ltd. - https://www.variscite.com
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/dts-v1/;
+
+#include "imx6ulz.dtsi"
+
+#include "imx6ulz-var-som.dtsi"
+#include "imx6ul-imx6ull-var-som-emmc.dtsi"
+
+#include "imx6ulz-var-som-concerto-board.dtsi"
+#include "imx6ul-imx6ull-var-som-concerto-board-sd-card.dtsi"
+
+/ {
+        model = "Variscite VAR-SOM-6UL with i.MX6ULZ, eMMC, SD card & WM8904 support on Concerto-Board";
+        compatible = "variscite,imx6ul-var-som", "fsl,imx6ulz";
+
+        gpio_hogs: gpio-hogs {
+        compatible = "gpio-hog";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_gpi_hog>;
+        };
+};
+
+&usdhc1 {
+        status = "okay";
+        cd-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
+};
+
+
+&gpio1 {
+    status = "okay";
+};
+
+&gpio2 {  
+    status = "okay";
+};
+
+&gpio3 {
+    status = "okay";
+};
+
+&gpio4 {
+    status = "okay";
+};
+
+&gpio5 {
+    status = "okay";
+};
+
+
+&usbotg1 {
+    dr_mode = "host";  // Set the USB OTG controller to Host mode
+    status = "okay";
+};
+&usbotg2 {
+    dr_mode = "peripheral";  // Set the USB OTG2 to peripheral mode
+    status = "okay";
+};
+
+
+&pwm2 {
+        status = "disabled";
+};
+
+&pwm1 {
+        status = "disabled";
+};
+
+&lcdif {
+        status = "disabled";
+};
+
+&uart2 {
+        status = "disabled";
+};
+
+
+&iomuxc {
+
+  pinctrl-names = "default";
+  pinctrl-0 = <&pinctrl_gpi_hog>;
+  pinctrl_gpi_hog: pinctrl_gpi_hog {
+      fsl,pins = <
+          MX6UL_PAD_ENET1_TX_DATA0__GPIO2_IO03     0x17059  // PUMP_MICROEN_3v3
+          MX6UL_PAD_ENET1_TX_CLK__GPIO2_IO06       0x17059   // PUMP_TEMPOK_3v3
+          MX6UL_PAD_LCD_ENABLE__GPIO3_IO01         0x17059  // USBH_PWREN
+          MX6UL_PAD_SNVS_TAMPER8__GPIO5_IO08       0x17059  // USBH_FAULT
+          MX6UL_PAD_LCD_DATA11__GPIO3_IO16         0x17059  // VALVE_PWR_EN1
+          MX6UL_PAD_NAND_CLE__GPIO4_IO15           0x17059  // VALVE_PWR_EN2
+          MX6UL_PAD_GPIO1_IO00__GPIO1_IO00         0x17059  // VALVE_PWR_EN3
+          MX6UL_PAD_SNVS_TAMPER3__GPIO5_IO03       0x17059  // VALVE_PWR_EN4
+          MX6UL_PAD_LCD_DATA15__GPIO3_IO20         0x17059  // GPIO0
+          MX6UL_PAD_LCD_DATA18__GPIO3_IO23         0x17059  // GPIO1
+          MX6UL_PAD_LCD_DATA19__GPIO3_IO24         0x17059  // GPIO2
+          MX6UL_PAD_LCD_DATA22__GPIO3_IO27         0x17059  // GPIO3
+          MX6UL_PAD_LCD_DATA23__GPIO3_IO28         0x17059  // GPIO4
+          MX6UL_PAD_LCD_DATA08__GPIO3_IO13         0x17059  // GPIO5
+          MX6UL_PAD_LCD_DATA09__GPIO3_IO14         0x17059  // GPIO6
+          MX6UL_PAD_LCD_RESET__GPIO3_IO04          0x17059  // GPIO7
+          MX6UL_PAD_LCD_CLK__GPIO3_IO00            0x17059  // GPIO8
+          MX6UL_PAD_ENET1_RX_EN__GPIO2_IO02        0x17059  // GPIO9
+          MX6UL_PAD_SNVS_TAMPER1__GPIO5_IO01       0x17059  // TSCOM_GPIO1
+          MX6UL_PAD_NAND_CE1_B__GPIO4_IO14         0x17059  // TSCOM_GPIO2
+          MX6UL_PAD_SNVS_TAMPER9__GPIO5_IO09       0x17059  // TSPGM N Reset
+          MX6UL_PAD_SNVS_TAMPER5__GPIO5_IO05       0x17059  // TSPGM SWCLK
+          MX6UL_PAD_ENET1_TX_EN__GPIO2_IO05       0x17059  // Power Switch
+          MX6UL_PAD_ENET1_RX_ER__GPIO2_IO07       0x17059  // Button Volume Down
+          MX6UL_PAD_ENET1_RX_DATA1__GPIO2_IO01    0x17059  // Button Mute
+          MX6UL_PAD_ENET1_RX_DATA0__GPIO2_IO00    0x17059  // Button Volume up
+          MX6UL_PAD_LCD_HSYNC__GPIO3_IO02         0x17059  // Fan 1 Tach
+          MX6UL_PAD_LCD_VSYNC__GPIO3_IO03         0x17059  // Fan 2 Tach
+          MX6UL_PAD_NAND_DQS__GPIO4_IO16          0x17059  //VIBR_TRIG
+          
+      >;
+  };
+
+};

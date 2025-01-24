@@ -67,14 +67,6 @@
     export = <0>;
 };
 
-/* PWM4 */
-&pwm4 {
-  pinctrl-names = "default";
-  pinctrl-0 = <&pinctrl_pwm4>;
-  status = "okay";
-  export = <0>;
-};
-
 /* ttymxc4 UART */
 &uart5 {
   pinctrl-names = "default";
@@ -120,8 +112,12 @@
   status = "disabled";
 };
 
+&csi {
+        status = "disabled";
+};
+
 &fec2 {
-  status = "disabled";
+  status = "okay";
 };
 
 &usbotg1 {
@@ -129,11 +125,10 @@
     status = "okay";
 };
 &usbotg2 {
-    dr_mode = "peripheral";  // Set the USB OTG controller to Host mode
+    dr_mode = "peripheral";  // Set the USB OTG2 to peripheral mode
     status = "okay";
 };
 
-//todo: do we need to separately add usborg2 as a peripheral? status ok?
 
 &usdhc1 {
   cd-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
@@ -217,13 +212,6 @@
       >;
   };
 
-  /* PWM4 Pin */
-  pinctrl_pwm4: pwm4grp {
-      fsl,pins = <
-          MX6UL_PAD_GPIO1_IO05__PWM4_OUT          0x1b0b0
-      >;
-  };
-
   pinctrl_uart5: uart5grp {
     fsl,pins = <
       MX6UL_PAD_CSI_DATA00__UART5_DCE_TX  0x1b0b1
@@ -254,3 +242,4 @@
   };
 
 };
+
